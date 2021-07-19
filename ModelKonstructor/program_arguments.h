@@ -32,8 +32,8 @@ class program_arguments {
       "над предыдущими значениями !!! Ещё не работает"};*/
 
   // Default values
-  inline static unsigned method_value = 0;
-  inline static unsigned additional_value = 7;
+  /*inline static unsigned method_value = 0;
+  inline static unsigned additional_value = 7;*/
 
 public:
   // Switches
@@ -42,8 +42,8 @@ public:
   constexpr static std::string_view folder_switch{"folder"};
   constexpr static std::string_view steps_switch{"steps"};
   constexpr static std::string_view length_switch{"length"};
-  constexpr static std::string_view method_switch{"method"};
-  constexpr static std::string_view additional_switch{"add"};
+  /*constexpr static std::string_view method_switch{"method"};
+  constexpr static std::string_view additional_switch{"add"};*/
 
   enum type : unsigned { rotation, surface };
 
