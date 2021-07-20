@@ -14,7 +14,7 @@ class model_constructor {
 
 public:
   // Reconstruction methods
-  enum class methods : int8_t { advancing_front, scale_space, poisson };
+  enum class methods : unsigned { advancing_front, scale_space, poisson };
 
 private:
   // Chosen reconstruction methods

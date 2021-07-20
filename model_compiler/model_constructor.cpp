@@ -18,29 +18,48 @@
 #include <CGAL/poisson_surface_reconstruction.h>
 #include <CGAL/remove_outliers.h>
 
+#ifndef FMT_UNICODE
+#define FMT_UNICODE 1
+#endif
+#include <fmt/core.h>
+
 auto model_constructor::remove_outliers_from_set(point_set &points,
                                                  unsigned k_neighbors) const
     -> void
 
 {
+  fmt::print("Удалаение посторонних точек из облака...\n");
+
   const auto outliers_iterator = CGAL::remove_outliers<CGAL::Parallel_tag>(
       points, k_neighbors, points.parameters().threshold_percent(5.0));
+
+  fmt::print("Удалено {} посторонних точек\n",
+             std::distance(outliers_iterator, points.end()));
+
   points.remove(outliers_iterator, points.end());
   points.collect_garbage();
 }
 
 auto model_constructor::simplify_set(point_set &points,
                                      unsigned k_neighbors) const -> void {
+  fmt::print("Упрощение облака точек...\n");
+
   const auto spacing =
       CGAL::compute_average_spacing<CGAL::Parallel_tag>(points, k_neighbors);
   const auto simplification_iterator =
       CGAL::grid_simplify_point_set(points, 2. * spacing);
+
+  fmt::print("Удалено {} точек в результате упрощения\n",
+             std::distance(simplification_iterator, points.end()));
+
   points.remove(simplification_iterator, points.end());
   points.collect_garbage();
 }
 
 auto model_constructor::smooth_set(point_set &points,
                                    unsigned k_neighbors) const -> void {
+  fmt::print("Сглаживание облака точек\n");
+
   CGAL::jet_smooth_point_set<CGAL::Parallel_tag>(points, k_neighbors);
 }
 
@@ -123,18 +142,23 @@ auto model_constructor::do_poisson(point_set &points) const -> surface_mesh {
 
 auto model_constructor::make_mesh(point_set points) const -> surface_mesh {
   if (points.empty()) {
-    throw std::exception("No points for model");
+    throw std::exception(
+        "Нет точек для построения модели. Проверьте файлы сканироваия");
   }
   process_additional(points);
   switch (method_) {
   case methods::advancing_front:
+    fmt::print("Построение модели методом опережающей реконструкции фронта\n");
     return do_advancing_front(points);
   case methods::scale_space:
+    fmt::print(
+        "Построение модели методом масштабной реконструкции пространства\n");
     return do_scale_space(points);
   case methods::poisson:
+    fmt::print("Построение модели методом реконструкции Пуассона\n");
     return do_poisson(points);
   default:
-    throw std::exception("There is not such model construction methods");
+    throw std::exception("Неверный номер метода реконструкции");
   }
 }
 
