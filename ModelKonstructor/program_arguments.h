@@ -23,17 +23,18 @@ class program_arguments {
   constexpr static std::string_view length_desc{
       "расстояние между полосами сканирования в пикселях (используется с типом "
       "2)"};
-  /*constexpr static std::string_view method_desc{
-      "метод реконструкции: 0 - advancing front, 1 - scale space, 2 - "
-      "Poisson !!! Ещё не работает"};
+  constexpr static std::string_view method_desc{
+      "метод реконструкции: 0 - опережающая реконструкция фронта, 1 - "
+      "масштабная реконструкция пространства, 2 - "
+      "реконструкция Пуассона"};
   constexpr static std::string_view additional_desc{
       "дополнительные операции над облаком точек: 1 - упрощение; 2 - удаление "
-      "\"торчащих\"точек; 4 - сглаживание; значения, получаемые операцией ИЛИ "
-      "над предыдущими значениями !!! Ещё не работает"};*/
+      "\"посторонних\" точек; 4 - сглаживание; значения, получаемые операцией "
+      "ИЛИ над предыдущими значениями"};
 
   // Default values
-  /*inline static unsigned method_value = 0;
-  inline static unsigned additional_value = 7;*/
+  inline static unsigned method_value = 0;
+  inline static unsigned additional_value = 7;
 
 public:
   // Switches
@@ -42,8 +43,8 @@ public:
   constexpr static std::string_view folder_switch{"folder"};
   constexpr static std::string_view steps_switch{"steps"};
   constexpr static std::string_view length_switch{"length"};
-  /*constexpr static std::string_view method_switch{"method"};
-  constexpr static std::string_view additional_switch{"add"};*/
+  constexpr static std::string_view method_switch{"method"};
+  constexpr static std::string_view additional_switch{"add"};
 
   enum type : unsigned { rotation, surface };
 

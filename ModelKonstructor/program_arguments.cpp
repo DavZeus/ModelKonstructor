@@ -30,14 +30,13 @@ program_arguments::program_arguments()
       steps_switch.data(), boost::program_options::value<unsigned>(),
       steps_desc.data())(length_switch.data(),
                          boost::program_options::value<float>(),
-                         length_desc.data()) /*(
-       method_switch.data(),
-       boost::program_options::value<decltype(method_value)>()->default_value(
-           method_value),
-       method_desc.data())(
-       additional_switch.data(),
-       boost::program_options::value<decltype(additional_value)>()
-           ->default_value(additional_value),
-       additional_desc.data())*/
-      ;
+                         length_desc.data())(
+      method_switch.data(),
+      boost::program_options::value<decltype(method_value)>()->default_value(
+          method_value),
+      method_desc.data())(
+      additional_switch.data(),
+      boost::program_options::value<decltype(additional_value)>()
+          ->default_value(additional_value),
+      additional_desc.data());
 }
