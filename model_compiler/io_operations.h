@@ -1,4 +1,4 @@
-﻿#ifndef IO_OPERATIONS_H
+#ifndef IO_OPERATIONS_H
 #define IO_OPERATIONS_H
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>

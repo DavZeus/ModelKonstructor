@@ -28,12 +28,12 @@ auto model_constructor::remove_outliers_from_set(point_set &points,
     -> void
 
 {
-  fmt::print("Удалаение посторонних точек из облака...\n");
+  fmt::print("РЈРґР°Р»Р°РµРЅРёРµ РїРѕСЃС‚РѕСЂРѕРЅРЅРёС… С‚РѕС‡РµРє РёР· РѕР±Р»Р°РєР°...\n");
 
   const auto outliers_iterator = CGAL::remove_outliers<CGAL::Parallel_tag>(
       points, k_neighbors, points.parameters().threshold_percent(5.0));
 
-  fmt::print("Удалено {} посторонних точек\n",
+  fmt::print("РЈРґР°Р»РµРЅРѕ {} РїРѕСЃС‚РѕСЂРѕРЅРЅРёС… С‚РѕС‡РµРє\n",
              std::distance(outliers_iterator, points.end()));
 
   points.remove(outliers_iterator, points.end());
@@ -42,14 +42,14 @@ auto model_constructor::remove_outliers_from_set(point_set &points,
 
 auto model_constructor::simplify_set(point_set &points,
                                      unsigned k_neighbors) const -> void {
-  fmt::print("Упрощение облака точек...\n");
+  fmt::print("РЈРїСЂРѕС‰РµРЅРёРµ РѕР±Р»Р°РєР° С‚РѕС‡РµРє...\n");
 
   const auto spacing =
       CGAL::compute_average_spacing<CGAL::Parallel_tag>(points, k_neighbors);
   const auto simplification_iterator =
       CGAL::grid_simplify_point_set(points, 2. * spacing);
 
-  fmt::print("Удалено {} точек в результате упрощения\n",
+  fmt::print("РЈРґР°Р»РµРЅРѕ {} С‚РѕС‡РµРє РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ СѓРїСЂРѕС‰РµРЅРёСЏ\n",
              std::distance(simplification_iterator, points.end()));
 
   points.remove(simplification_iterator, points.end());
@@ -58,7 +58,7 @@ auto model_constructor::simplify_set(point_set &points,
 
 auto model_constructor::smooth_set(point_set &points,
                                    unsigned k_neighbors) const -> void {
-  fmt::print("Сглаживание облака точек\n");
+  fmt::print("РЎРіР»Р°Р¶РёРІР°РЅРёРµ РѕР±Р»Р°РєР° С‚РѕС‡РµРє\n");
 
   CGAL::jet_smooth_point_set<CGAL::Parallel_tag>(points, k_neighbors);
 }
@@ -143,22 +143,22 @@ auto model_constructor::do_poisson(point_set &points) const -> surface_mesh {
 auto model_constructor::make_mesh(point_set points) const -> surface_mesh {
   if (points.empty()) {
     throw std::exception(
-        "Нет точек для построения модели. Проверьте файлы сканироваия");
+        "РќРµС‚ С‚РѕС‡РµРє РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РјРѕРґРµР»Рё. РџСЂРѕРІРµСЂСЊС‚Рµ С„Р°Р№Р»С‹ СЃРєР°РЅРёСЂРѕРІР°РёСЏ");
   }
   process_additional(points);
   switch (method_) {
   case methods::advancing_front:
-    fmt::print("Построение модели методом опережающей реконструкции фронта\n");
+    fmt::print("РџРѕСЃС‚СЂРѕРµРЅРёРµ РјРѕРґРµР»Рё РјРµС‚РѕРґРѕРј РѕРїРµСЂРµР¶Р°СЋС‰РµР№ СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё С„СЂРѕРЅС‚Р°\n");
     return do_advancing_front(points);
   case methods::scale_space:
     fmt::print(
-        "Построение модели методом масштабной реконструкции пространства\n");
+        "РџРѕСЃС‚СЂРѕРµРЅРёРµ РјРѕРґРµР»Рё РјРµС‚РѕРґРѕРј РјР°СЃС€С‚Р°Р±РЅРѕР№ СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР°\n");
     return do_scale_space(points);
   case methods::poisson:
-    fmt::print("Построение модели методом реконструкции Пуассона\n");
+    fmt::print("РџРѕСЃС‚СЂРѕРµРЅРёРµ РјРѕРґРµР»Рё РјРµС‚РѕРґРѕРј СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё РџСѓР°СЃСЃРѕРЅР°\n");
     return do_poisson(points);
   default:
-    throw std::exception("Неверный номер метода реконструкции");
+    throw std::exception("РќРµРІРµСЂРЅС‹Р№ РЅРѕРјРµСЂ РјРµС‚РѕРґР° СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё");
   }
 }
 
