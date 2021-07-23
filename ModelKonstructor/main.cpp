@@ -11,6 +11,8 @@
 
 int main(int argc, char *argv[]) {
   try {
+    // std::locale::global(std::locale(".utf-8"));
+
     program_arguments args;
     args.parse(argc, argv);
 
