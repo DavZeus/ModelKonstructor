@@ -124,6 +124,7 @@ auto model_constructor::do_scale_space(point_set &points) const
 }
 
 auto model_constructor::do_poisson(point_set &points) const -> surface_mesh {
+  points.add_normal_map();
   const auto k_neighbors =
       static_cast<unsigned>(CGAL::estimate_global_k_neighbor_scale(points) * 2);
   const auto spacing =
