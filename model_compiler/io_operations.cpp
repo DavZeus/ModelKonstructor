@@ -1,9 +1,5 @@
 #include "io_operations.h"
 
-//#ifndef _CRT_SECURE_NO_WARNINGS
-//#define _CRT_SECURE_NO_WARNINGS
-//#endif
-
 #include <CGAL/IO/STL_writer.h>
 #include <chrono>
 #include <ctime>
@@ -17,13 +13,12 @@ auto mc::io::generate_time_string() -> std::string {
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   tm tm{};
   localtime_s(&tm, &time);
-  // auto tm = *std::localtime(&time);
   time_parse << std::put_time(&tm, "%Y%m%d%H%M%S") << std::flush;
   return time_parse.str();
 }
 
 auto mc::io::write_mesh(const surface_mesh &mesh,
-                        std::filesystem::path filename) -> void {
+                        std::filesystem::path filename) -> std::string {
   if (filename.empty()) {
     filename = "model-" + generate_time_string() + ".stl";
   } else if (filename.extension().empty()) {
@@ -38,4 +33,6 @@ auto mc::io::write_mesh(const surface_mesh &mesh,
   CGAL::write_STL(mesh, file);
   // Force write content to file
   file.flush();
+
+  return filename.string();
 }

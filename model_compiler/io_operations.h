@@ -13,9 +13,9 @@ using surface_mesh = CGAL::Surface_mesh<CGAL::Epick::Point_3>;
 
 // Get current time as string
 auto generate_time_string() -> std::string;
-// Write mesh to stl file
+// Write mesh to stl file. Returns effective file name
 auto write_mesh(const surface_mesh &mesh, std::filesystem::path filename = {})
-    -> void;
+    -> std::string;
 
 } // namespace io
 
