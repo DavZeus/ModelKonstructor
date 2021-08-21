@@ -5,7 +5,7 @@
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Surface_mesh.h>
 
-class model_constructor {
+class model_generator {
   // Stores points for use in CGAL
   using point_set =
       CGAL::Point_set_3<CGAL::Epick::Point_3, CGAL::Epick::Vector_3>;
@@ -58,6 +58,6 @@ public:
   // Reconstruct model from point cloud acquired from camera
   [[nodiscard]] auto make_mesh(point_set points) const -> surface_mesh;
 
-  explicit model_constructor(methods method, additional_options options = all);
+  explicit model_generator(methods method, additional_options options = all);
 };
 #endif // MODEL_CONSTRUCTOR_H

@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 
-auto mc::io::generate_time_string() -> std::string {
+auto mk::io::generate_time_string() -> std::string {
   std::stringstream time_parse;
   auto time =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
@@ -17,7 +17,7 @@ auto mc::io::generate_time_string() -> std::string {
   return time_parse.str();
 }
 
-auto mc::io::write_mesh(const surface_mesh &mesh,
+auto mk::io::write_mesh(const surface_mesh &mesh,
                         std::filesystem::path filename) -> std::string {
   if (filename.empty()) {
     filename = "model-" + generate_time_string() + ".stl";

@@ -21,10 +21,10 @@
     <ClCompile Include="..\src\lib\io_operations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\lib\model_compiler.cpp">
+    <ClCompile Include="..\src\lib\model_konstructor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\lib\model_constructor.cpp">
+    <ClCompile Include="..\src\lib\model_generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="..\include\lib\io_operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\lib\model_compiler.h">
+    <ClInclude Include="..\include\lib\model_konstructor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\lib\model_constructor.h">
+    <ClInclude Include="..\include\lib\model_generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

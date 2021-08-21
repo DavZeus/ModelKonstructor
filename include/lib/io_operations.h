@@ -6,7 +6,7 @@
 
 #include <filesystem>
 
-namespace mc {
+namespace mk {
 namespace io {
 // Stores reconstructed model
 using surface_mesh = CGAL::Surface_mesh<CGAL::Epick::Point_3>;
@@ -19,5 +19,5 @@ auto write_mesh(const surface_mesh &mesh, std::filesystem::path filename = {})
 
 } // namespace io
 
-} // namespace mc
+} // namespace mk
 #endif // IO_OPERATIONS_H

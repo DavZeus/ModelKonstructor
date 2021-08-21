@@ -1,5 +1,5 @@
 #include <boost/exception/diagnostic_information.hpp>
-#include <model_compiler.h>
+#include <model_konstructor.h>
 
 #ifndef FMT_UNICODE
 #define FMT_UNICODE 1
@@ -35,10 +35,10 @@ int main(int argc, char *argv[]) {
       return EXIT_SUCCESS;
     }
 
-    const auto method = static_cast<model_constructor::methods>(
-        args.get_value(program_arguments::method_switch).as<unsigned>());
-    const auto additional = static_cast<model_constructor::additional_options>(
-        args.get_value(program_arguments::additional_switch).as<unsigned>());
+    const auto method =
+        args.get_value(program_arguments::method_switch).as<unsigned>();
+    const auto additional =
+        args.get_value(program_arguments::additional_switch).as<unsigned>();
 
     switch (const auto type = static_cast<program_arguments::type>(
                 args.get_value(program_arguments::type_switch).as<unsigned>());
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
       const auto steps =
           args.get_value(program_arguments::steps_switch).as<unsigned>();
 
-      mc::make_rotation_model(folder, method, additional, steps);
+      mk::make_rotation_model(folder.c_str(), method, additional, steps);
     } break;
     case program_arguments::surface: {
       if (args.check_value(program_arguments::length_switch) == 0U) {
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
       const auto length =
           args.get_value(program_arguments::length_switch).as<float>();
 
-      mc::make_surface_model(folder, method, additional, length);
+      mk::make_surface_model(folder.c_str(), method, additional, length);
     } break;
     default:
       fmt::print("Неправильный тип сканирования. Для дополнительной информации "

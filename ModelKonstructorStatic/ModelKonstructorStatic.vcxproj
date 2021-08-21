@@ -120,7 +120,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;MK_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -140,7 +140,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;MK_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -159,14 +159,14 @@
   <ItemGroup>
     <ClCompile Include="..\src\lib\data_extractor.cpp" />
     <ClCompile Include="..\src\lib\io_operations.cpp" />
-    <ClCompile Include="..\src\lib\model_compiler.cpp" />
-    <ClCompile Include="..\src\lib\model_constructor.cpp" />
+    <ClCompile Include="..\src\lib\model_konstructor.cpp" />
+    <ClCompile Include="..\src\lib\model_generator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\lib\data_extractor.h" />
     <ClInclude Include="..\include\lib\io_operations.h" />
-    <ClInclude Include="..\include\lib\model_compiler.h" />
-    <ClInclude Include="..\include\lib\model_constructor.h" />
+    <ClInclude Include="..\include\lib\model_konstructor.h" />
+    <ClInclude Include="..\include\lib\model_generator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

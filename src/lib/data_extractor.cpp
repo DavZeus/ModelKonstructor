@@ -4,7 +4,7 @@
 #include <fstream>
 #include <numbers>
 
-auto mc::data_extractor::form_rotation(const std::string &folder,
+auto mk::data_extractor::form_rotation(const std::string &folder,
                                        const unsigned steps_count)
     -> point_set {
   constexpr float full_angle = 360.F;
@@ -57,7 +57,7 @@ auto mc::data_extractor::form_rotation(const std::string &folder,
   return cloud;
 }
 
-auto mc::data_extractor::form_surface(const std::string &folder,
+auto mk::data_extractor::form_surface(const std::string &folder,
                                       const float step_length) -> point_set {
   point_set cloud;
 

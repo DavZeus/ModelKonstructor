@@ -1,4 +1,4 @@
-#include "model_constructor.h"
+#include "model_generator.h"
 
 #ifndef CGAL_LINKED_WITH_TBB
 #define CGAL_LINKED_WITH_TBB
@@ -23,8 +23,8 @@
 #endif
 #include <fmt/core.h>
 
-auto model_constructor::remove_outliers_from_set(point_set &points,
-                                                 unsigned k_neighbors) const
+auto model_generator::remove_outliers_from_set(point_set &points,
+                                               unsigned k_neighbors) const
     -> void
 
 {
@@ -40,8 +40,8 @@ auto model_constructor::remove_outliers_from_set(point_set &points,
   points.collect_garbage();
 }
 
-auto model_constructor::simplify_set(point_set &points,
-                                     unsigned k_neighbors) const -> void {
+auto model_generator::simplify_set(point_set &points,
+                                   unsigned k_neighbors) const -> void {
   fmt::print("Упрощение облака точек...\n");
 
   const auto spacing =
@@ -56,14 +56,14 @@ auto model_constructor::simplify_set(point_set &points,
   points.collect_garbage();
 }
 
-auto model_constructor::smooth_set(point_set &points,
-                                   unsigned k_neighbors) const -> void {
+auto model_generator::smooth_set(point_set &points, unsigned k_neighbors) const
+    -> void {
   fmt::print("Сглаживание облака точек\n");
 
   CGAL::jet_smooth_point_set<CGAL::Parallel_tag>(points, k_neighbors);
 }
 
-auto model_constructor::process_additional(point_set &points) const -> void {
+auto model_generator::process_additional(point_set &points) const -> void {
 
   const auto k_neighbors =
       static_cast<unsigned>(CGAL::estimate_global_k_neighbor_scale(points) * 2);
@@ -78,7 +78,7 @@ auto model_constructor::process_additional(point_set &points) const -> void {
   }
 }
 
-auto model_constructor::do_advancing_front(point_set &points) const
+auto model_generator::do_advancing_front(point_set &points) const
     -> surface_mesh {
   using facet = std::array<std::size_t, 3>;
   std::vector<facet> facets;
@@ -96,8 +96,7 @@ auto model_constructor::do_advancing_front(point_set &points) const
   return output_mesh;
 }
 
-auto model_constructor::do_scale_space(point_set &points) const
-    -> surface_mesh {
+auto model_generator::do_scale_space(point_set &points) const -> surface_mesh {
   std::vector<CGAL::Epick::Point_3> vertices;
   std::vector<std::array<std::size_t, 3>> facets;
   CGAL::Surface_mesh<CGAL::Epick::Point_3> output_mesh;
@@ -123,7 +122,7 @@ auto model_constructor::do_scale_space(point_set &points) const
   return output_mesh;
 }
 
-auto model_constructor::do_poisson(point_set &points) const -> surface_mesh {
+auto model_generator::do_poisson(point_set &points) const -> surface_mesh {
   points.add_normal_map();
   const auto k_neighbors =
       static_cast<unsigned>(CGAL::estimate_global_k_neighbor_scale(points) * 2);
@@ -141,7 +140,7 @@ auto model_constructor::do_poisson(point_set &points) const -> surface_mesh {
   return output_mesh;
 }
 
-auto model_constructor::make_mesh(point_set points) const -> surface_mesh {
+auto model_generator::make_mesh(point_set points) const -> surface_mesh {
   if (points.empty()) {
     throw std::exception(
         "Нет точек для построения модели. Проверьте файлы сканироваия");
@@ -163,5 +162,5 @@ auto model_constructor::make_mesh(point_set points) const -> surface_mesh {
   }
 }
 
-model_constructor::model_constructor(methods method, additional_options options)
+model_generator::model_generator(methods method, additional_options options)
     : method_(method), options_(options) {}

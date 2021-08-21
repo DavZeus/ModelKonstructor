@@ -150,8 +150,8 @@
     <ClInclude Include="..\include\app\program_arguments.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModelKonstructorStatic\ModelKonstructorStatic.vcxproj">
-      <Project>{0081a8a6-4b67-4f4b-84a3-2211b2d626ee}</Project>
+    <ProjectReference Include="..\ModelKonstructorDynamic\ModelKonstructorDynamic.vcxproj">
+      <Project>{08cb6a5d-538f-4205-9938-6d8c5323c7e9}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
